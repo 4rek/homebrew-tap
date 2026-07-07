@@ -7,7 +7,7 @@ cask "markdown-previewer" do
   desc "Quick Look extension that renders Markdown files with GitHub-style formatting"
   homepage "https://github.com/4rek/markdown-previewer"
 
-  depends_on macos: ">= :ventura"
+  depends_on macos: :ventura
 
   app "Markdown Previewer.app"
 
@@ -22,13 +22,11 @@ cask "markdown-previewer" do
     system_command "/usr/bin/qlmanage", args: ["-r", "cache"]
   end
 
-  uninstall quit: "com.apjuszczyk.markdownpreviewer"
-
   uninstall_postflight do
     system_command "/usr/bin/qlmanage", args: ["-r"]
   end
 
-  zap trash: [
-    "~/Library/Preferences/com.apjuszczyk.markdownpreviewer.plist",
-  ]
+  uninstall quit: "com.apjuszczyk.markdownpreviewer"
+
+  zap trash: "~/Library/Preferences/com.apjuszczyk.markdownpreviewer.plist"
 end
